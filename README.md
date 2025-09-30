@@ -1,149 +1,160 @@
-INTRODUZIONE A ECONOMIA COMPUTAZIONALE 
+This document is a translation and explanation of the provided Italian text about Computational Economics and the FORTRAN 90 programming language, aimed at beginners but progressing to an advanced level.
 
-È un libro per principianti ma che progredisce a un livello avanzato usando FORTRAN 90. 
+FORTRAN 90 is a high-level language with the following characteristics:
 
-FORTRAN 90 è un linguaggio ad alto livello.
+Imperative: Execution starts from the first line at the top and proceeds sequentially down to the last line.
 
-- Imperativo: inizia a compilare dalla prima riga in alto fino all'ultima in basso  
-- Procedurale: è un linguaggio che può essere usato in altre istanza funzioni e subdirectories da altri programmi  
-- Alto-livello: astrae il linguaggio macchina e l'hardware sulla quale lavora e con il giusto compilatore può girare su qualsiasi macchina 
+Procedural: It's a language whose code (functions, subdirectories) can be used and called upon by other programs or code instances.
 
- 
-1. codice sorgente 
-	2. COMPILATORE: prende librerie extra e compila L'OBJECT CODE che contiene il codice binario in .OBJ 
-	3. IL CODICE BINARIO passa una fase di validazione e se tutto va bene OBJECT CODE + Librerie esterne daranno vita al file ESEGUIBILE .exe 
+High-Level: It abstracts away the machine language and the underlying hardware. With the correct compiler, it can run on virtually any machine.
 
-quindi codice binario .obj 
-codice eseguibile .exe 
-codice fortran .f90/f95
+Program Compilation Process
+The process of turning source code into an executable program follows these steps:
 
-L'istanza del codice program in Fortran non può:
+Source Code: The human-readable program code (e.g., a .f90 or .f95 file).
 
-1. avere più di 31 caratteri
-2. deve iniziare con una lettera 
-3. gli altri caratteri possono avere qualsiasi simbolo 
-4. il compilatore è case insesitive a capital letters 
-5. il nome non può essere un comando valido 
+COMPILER: The compiler takes the source code, potentially including extra libraries, and compiles it into OBJECT CODE. This code contains the binary representation and is typically saved in a file with the .OBJ extension (or similar, like .o).
 
-DICHIARAZIONE DI VARIABILI 
-Di per sé fortran assegna ogni variabile al tipo INTEGER INT. 
-Per prevenire questa auto-assegnazione usiamo IMPLICIT NONE.
+Executable File: The binary code undergoes a validation phase. If successful, the OBJECT CODE plus any external libraries are linked together to create the EXECUTABLE FILE, typically with a .exe extension.
 
-BUILD E COMPILAZIONE DEL PROGRAMMA 
-Iniziamo generando il file .o ovvero oggetto sorgente che associato poi a librerie esterne e 
-COMPILATO andrà a popolare il nostro file .exe all'interno di geany 
+Binary Code: .obj (or .o)
 
-FORMATTAZIONE 
- 
-Studiando (*,*) verso una write e quindi una stampa il primo (*, serve per descrivere una location a dove far puntare la variabile 
-mentre il secondo ,*) specifica il formato per la quale vogliamo la stampa delle variabili e della stampa stessa. 
+Executable Code: .exe
 
--l2 valore booleano true or false con massimo grandezza di 2 
--i3 integer di massimo in questo caso 3 digits 
--f12.4 valore reale con massimo 12 digits INCLUSO IL PUNTO DECIMALE di cui 4 nei valori decimali dopo virgola 
--x spazio bianco 
--a string di lunghezza arbitraria 
+Fortran Source Code: .f90/.f95
 
-DO-LOOPS 
-<> non vanno evidenziati nel codice o inseriti, la forma sarebbe:
-	do <variable> = <beginning>, <ending>, <stepsize>     nel caso sia un decremento specifichiamo il -1 
-	   <executable statement> 
-	enddo
+Fortran Program Naming Rules
+The name of a program instance in Fortran must adhere to the following rules:
 
-DBLE command 
-serve a convertire un integer in real*8 
+Cannot be longer than 31 characters.
 
+Must start with a letter.
 
+Subsequent characters can be any symbol (typically letters, numbers, and underscores).
 
-ARRAYS 
-Esempi di array di varie dimensioni: 
+The compiler is case-insensitive (it doesn't distinguish between capital and lower-case letters).
 
-real*8 :: a(10) array monodimensionale di size 10 partendo da 1 
-integer :: b(12, 3, 12) array tridimensionale con varie size per x,y,z 
-real*8 :: c(0:12, -3:8) array bidimensionale con specifiche di indicizzazione dove in questo caso da 0:12 la size è pari a 13 
+The name cannot be a valid Fortran command (a reserved keyword).
 
-program Arrays 
+Variable Declaration
+By default, Fortran assigns the INTEGER type (INT) to every variable.
 
-    implicit none 
-    real*8 :: x(0:10), y(0:10) 
-    integer :: J 
+To prevent this automatic assignment, the statement IMPLICIT NONE is used, which forces the programmer to explicitly declare the type of every variable.
+
+Building and Compiling the Program
+The process starts by generating the object file (.o or .obj), which is the compiled source code. This object file, when linked with external libraries and finally COMPILED (linked), populates the content of the executable file (.exe) within the development environment (like Geany).
+
+Output Formatting (WRITE Statement)
+When using the write(*,*) statement for printing output, the first (* is used to specify the output location (e.g., * means the standard output, usually the screen).
+
+The second *) specifies the format in which the variables and the output itself should be printed.
+
+Format codes include:
+
+L2: Logical (Boolean) value (TRUE or FALSE) with a maximum field width of 2.
+
+I3: Integer value with a maximum field width of 3 digits.
+
+F12.4: Real (floating-point) value with a maximum field width of 12 characters including the decimal point, with 4 digits reserved for the decimal part after the point.
+
+X: A white space (blank) character.
+
+A: An arbitrary-length string (text).
+
+DO-LOOPS (Iteration)
+The syntax for a DO-LOOP (a form of a for loop) is:
+
+Fortran
+
+do <variable> = <beginning>, <ending>, <stepsize>
+    <executable statement>
+enddo
+The angle brackets < > are not to be included in the code.
+
+If the loop is a decrement (counting downwards), the <stepsize> must be explicitly specified, usually as -1.
+
+The DBLE command is used to convert an integer value into a real*8 (double-precision real) value.
+
+Arrays
+Arrays are collections of data elements, all of the same type.
+
+Examples of array declarations:
+
+real*8 :: a(10): A one-dimensional array of size 10, with indices starting from 1.
+
+integer :: b(12, 3, 12): A three-dimensional array with sizes 12×3×12 for the x, y, and z dimensions.
+
+real*8 :: c(0:12, -3:8): A two-dimensional array with explicit index ranges. The first dimension has indices from 0 to 12 (size 13), and the second has indices from -3 to 8 (size 12).
+
+Example Code: Arrays Program
+The example program initializes two double-precision arrays, x and y, calculates values for them, and prints a table of the results.
+
+Fortran
+
+program Arrays
+
+    implicit none
+    real*8 :: x(0:10), y(0:10)
+    integer :: J
     
     ! initialise x and calculate y
     
     do j = 0, 10
-        x(j) = 1d0 / 10d0*dble(j) 
-        y(j) = exp(x(j)) 
-    enddo 
+        x(j) = 1d0 / 10d0*dble(j)  ! Calculates x(j) = j/10.0
+        y(j) = exp(x(j))           ! Calculates y(j) = e^(x(j))
+    enddo
     
-    !output table of values 
-    write(*,'(a)')' x                   y '
+    !output table of values
+    write(*,'(a)')' x           y '
     do j = 0, 10
-        write(*,'(2f10.3)')x(j), y(j)
-    enddo 
+        write(*,'(2f10.3)')x(j), y(j) ! Prints two real values, each with a 10-char width and 3 decimal places
+    enddo
 
-endprogram 
+endprogram
+Slicing Notation
+The line y(:) = x(:) + 1d0 demonstrates Slicing Notation.
 
-OUTPUT:
- x                   y
-     0.000     1.000
-     0.100     1.105
-     0.200     1.221
-     0.300     1.350
-     0.400     1.492
-     0.500     1.649
-     0.600     1.822
-     0.700     2.014
-     0.800     2.226
-     0.900     2.460
-     1.000     2.718
+y(:) and x(:) means "every position" or "the entire array."
 
- 
-    ! give y the values of x plus 1 
-    ! è importante notare come y(:) serva a dire che il programma deve
-    ! fillare ogni posizione di all'interno di y 
-    ! si chiama NOTAZIONE DI SLICING 
-    y(:) = x(:) + 1d0
+This command is an array operation that sets the value of every element in the array y to the corresponding value in array x plus 1.0.
 
+Double Precision
+Double Precision in computing refers to a numerical representation format that uses more bits than single precision to store floating-point numbers, offering greater accuracy.
 
+Single Precision (REAL)
+Size: Typically 32 bits (4 bytes).
 
+Precision: Approximately 7–8 significant decimal digits.
 
-DOPPIA PRECISIONE 
+Fortran Declaration: real or real(kind=4).
 
-La doppia precisione in informatica e programmazione si riferisce a un formato di rappresentazione numerica che utilizza più bit rispetto alla singola precisione per memorizzare numeri in virgola mobile.
-In Fortran e nella maggior parte dei linguaggi di programmazione moderni:
+Double Precision (DOUBLE PRECISION or REAL*8)
+Size: Typically 64 bits (8 bytes).
 
-Singola precisione (Single precision):
+Precision: Approximately 15–17 significant decimal digits.
 
-Utilizza tipicamente 32 bit (4 byte)
-Ha circa 7-8 cifre decimali significative
-In Fortran si dichiara con real o real(kind=4)
+Fortran Declaration: double precision or real(kind=8).
 
+Constant Notation: Uses the suffix d0 (e.g., 6d0 instead of 6.0).
 
-Doppia precisione (Double precision): nd0 oppure esempio 
+Advantages of Double Precision
+Higher Precision: Can represent numbers with more significant figures.
 
-real*8 :: a 
-a = 6d0 
+Wider Range: Can represent much larger and much smaller numbers.
 
-Utilizza tipicamente 64 bit (8 byte)
-Ha circa 15-17 cifre decimali significative
-In Fortran si dichiara con double precision o real(kind=8)
+Less Rounding Error: Calculations accumulate fewer numerical errors.
 
-I vantaggi della doppia precisione sono:
+Double precision is typically used for scientific computing, numerical simulations, and any application where precision is critical.
 
--- Maggiore precisione: Puoi rappresentare numeri con più cifre significative
--- Intervallo più ampio: Puoi rappresentare numeri molto più grandi e molto più piccoli
--- Minore errore di arrotondamento: I calcoli accumulano meno errori numerici
+Example Code: Precision Comparison
+Fortran
 
-L'uso tipico della doppia precisione è per calcoli scientifici, simulazioni numeriche, e qualsiasi applicazione dove la precisione è critica.
-Esempio in Fortran:
 fortranprogram precisione
 
     implicit none
-    real :: x = 1.0/3.0           ! Singola precisione
-    double precision :: y = 1d0/3d0  ! Doppia precisione
+    real :: x = 1.0/3.0            ! Single precision
+    double precision :: y = 1d0/3d0 ! Double precision
     
-    print *, "Singola precisione:", x  ! Mostrerà circa 0.333333343
-    print *, "Doppia precisione:", y   ! Mostrerà circa 0.333333333333333
+    print *, "Singola precisione:", x    ! Output: ~0.333333343 (Lower precision)
+    print *, "Doppia precisione:", y     ! Output: ~0.333333333333333 (Higher precision)
 end program precisione
-
-
